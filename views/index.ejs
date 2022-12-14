@@ -3,12 +3,31 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title><%= message %></title>
+    <title></title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <script src='main.js'></script>
 </head>
 <body>
-    <p><%= message %></p>
+  <form>
+    <input type="text" name="color" id="szemSzinButton" placeholder="Szemszín">
+    <input type="submit" name="submit" value="Keresés">
+  </form>
+  <table>
+    <tr>
+      <td>Súly</td>
+      <td>Szem Szín</td>
+    </tr>
+    <% for (let m of macskak) { %> 
+      <tr>
+        <td><%= m.suly %></td>
+        <td><%= m.szem_szin %></td>
+      </tr>
+      
+<% } %>
+  </table>
+      
+  
+  
 </body>
 </html>
