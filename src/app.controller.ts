@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Post, Query, Render } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Query, Redirect, Render } from '@nestjs/common';
 import { get } from 'http';
 import { AppService } from './app.service';
 import db from './db';
@@ -30,10 +30,20 @@ export class AppController {
     }
   }
 
-  @Get('/cats/new')
+  @Get('cats/new')
   @Render('form')
-  async getNewCat(){
-    
+  newCatForm() {
+    return {};
   }
-
+  @Post('cats/new')
+  @Redirect()
+  async getNewCat(@Body() macska: Macska) {
+    const [result]: any = await db.execute(
+      'INSERT INTO macskak (suly, szem_szin) VALUES (?, ?)',
+      [macska.suly, macska.szem_szin],
+    );
+    return {
+      url: '/',
+    };
+  }
 }
